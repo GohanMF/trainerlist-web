@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>@ViewBag.Title - My ASP.NET MVC Application</title>
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" runat="server" media="screen" href="~/content/css/bootstrap.css" />
+        @Styles.Render("~/Content/css")
+        @Styles.Render("~/Content/css/bootstrap")
+        @Styles.Render("~/Content/css/mycss")
+        @Scripts.Render("~/bundles/modernizr")
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+      
+    </head>
+    <body >
+        <div class="container" >
+            <header class="main-menu">
+                <div class="navbar navbar-inverse">
+                    <div class="navbar-inner">
+                        <div class="nav-collapse collapse" >
+                            @Html.ActionLink("your logo here", "Index", "Home",new {@class="brand"})
+                            <ul id="menu" class="nav menu-list pull-right">
+                                <li class="active">@Html.ActionLink("Home", "Index", "Home")</li>
+                                <li>@Html.ActionLink("About", "About", "Home")</li>
+                                <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                                @Html.Partial("_LoginPartial") 
+                            </ul>                            
+                        </div>
+                           
+                         
+                    </div> 
+                </div>
+            </header>
+            <div id="body" class="">
+                @RenderSection("featured", required: false)
+                <section class="content-wrapper main-content clear-fix ">
+                    @RenderBody()
+                </section>
+            </div>
+            <footer class="span12">
+                <div class="content-wrapper">
+                    <div class="float-left">
+                        <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
+                    </div>
+                </div>
+            </footer>
+
+            @Scripts.Render("~/bundles/jquery")
+            @RenderSection("scripts", required: false)
+        </div> 
+    </body>
+</html>

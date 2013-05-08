@@ -1,0 +1,32 @@
+﻿    /* Login form in Menu */
+    .dropdown-login {
+        text-align      : center ;
+        padding-top     : 10px;
+        padding-left    : 10px;
+        padding-right   : 10px;
+        margin-left     : 0px !important ;
+    }
+
+    .dropdown-username {
+        width   : auto ;
+    }
+
+     .dropdown-password { 
+        width   : auto ; 
+    }
+    .dropdown-register {
+         margin-left     : 0px !important ;
+    }
+    .dropdown-signin {
+         margin-left     : 0px !important ;
+    }
+   
+    
+     /* Menu */
+
+    .main-menu {
+        margin-top : 10px;
+    }
+    .menu-list {
+        padding-right :30px;
+    }
