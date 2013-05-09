@@ -48,8 +48,9 @@ namespace TrainerList.Functions
             JObject jObject = JObject.Parse(streamReader.ReadLine());
 
 
+            Models.EditUser myuser = new Models.EditUser();
 
-          
+            myuser.Parse(jObject );
 
 
             
