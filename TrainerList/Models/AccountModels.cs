@@ -5,6 +5,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Globalization;
 using System.Web.Security;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using TrainerList.Functions;
 
 namespace TrainerList.Models
 {
@@ -36,7 +39,7 @@ namespace TrainerList.Models
         public string ExternalLoginData { get; set; }
     }
 
-    public class LocalPasswordModel
+    public class LocalPasswordModel // change password
     {
         [Required]
         [DataType(DataType.Password)]
@@ -114,4 +117,6 @@ namespace TrainerList.Models
         public string ProviderDisplayName { get; set; }
         public string ProviderUserId { get; set; }
     }
+
+   
 }

@@ -143,7 +143,7 @@ namespace TrainerList.Controllers
 
         //
         // POST: /Account/Disassociate
-
+        /*
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Disassociate(string provider, string providerUserId)
@@ -169,10 +169,10 @@ namespace TrainerList.Controllers
 
             return RedirectToAction("Manage", new { Message = message });
         }
-
+        */
         //
         // GET: /Account/Manage
-
+        /*
         public ActionResult Manage(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
@@ -187,7 +187,7 @@ namespace TrainerList.Controllers
 
         //
         // POST: /Account/Manage
-
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Manage(LocalPasswordModel model)
@@ -247,10 +247,10 @@ namespace TrainerList.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
-
+        */
         //
         // POST: /Account/ExternalLogin
-
+        /*
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -261,7 +261,8 @@ namespace TrainerList.Controllers
 
         //
         // GET: /Account/ExternalLoginCallback
-
+        */
+        /*
         [AllowAnonymous]
         public ActionResult ExternalLoginCallback(string returnUrl)
         {
@@ -291,10 +292,10 @@ namespace TrainerList.Controllers
                 return View("ExternalLoginConfirmation", new RegisterExternalLoginModel { UserName = result.UserName, ExternalLoginData = loginData });
             }
         }
-
+        */
         //
         // POST: /Account/ExternalLoginConfirmation
-
+        /*
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -337,16 +338,16 @@ namespace TrainerList.Controllers
             ViewBag.ReturnUrl = returnUrl;
             return View(model);
         }
-
+        */
         //
         // GET: /Account/ExternalLoginFailure
-
+        /*
         [AllowAnonymous]
         public ActionResult ExternalLoginFailure()
         {
             return View();
         }
-
+        
         [AllowAnonymous]
         [ChildActionOnly]
         public ActionResult ExternalLoginsList(string returnUrl)
@@ -375,7 +376,7 @@ namespace TrainerList.Controllers
             ViewBag.ShowRemoveButton = externalLogins.Count > 1 || OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
             return PartialView("_RemoveExternalLoginsPartial", externalLogins);
         }
-
+        */
         #region Helpers
         private ActionResult RedirectToLocal(string returnUrl)
         {

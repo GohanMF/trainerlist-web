@@ -27,7 +27,7 @@ namespace TrainerList.Controllers
             {
                  
                 ServerComunication Server = new ServerComunication();
-                String Response = Server.DoGet("/trainer/a36dfec1f123670e36885e88eb0009e8");
+              //  String Response = Server.DoGet("/trainer/a36dfec1f123670e36885e88eb0009e8");
                 Console.WriteLine(Response);
             }
             catch (System.Net.WebException ex)

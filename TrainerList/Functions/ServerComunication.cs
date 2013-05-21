@@ -28,47 +28,29 @@ namespace TrainerList.Functions
 
             return responsebody.ToString();
 
+            /*TO DO
+           * Create some execption for errors
+           * Create some message to show*/
+
         }
 
-        public String DoGet(string path )
+        public JObject DoGet(string path)
         {             
 
 
-             WebClient client = new WebClient();
-
-         
+            WebClient client = new WebClient();
             Stream stream =  client.OpenRead(url + path);
-            
             StreamReader streamReader = new StreamReader (stream);
-            /*
-            string text = streamReader.ReadToEnd();
+            JObject myjObject = JObject.Parse(streamReader.ReadLine());
+            client.Dispose();
 
-            streamReader.
-            */
-            JObject jObject = JObject.Parse(streamReader.ReadLine());
+            /*TO DO
+             * Create some execption for errors
+             * Create some message to show*/
+          
 
-
-            Models.EditUser myuser = new Models.EditUser();
-
-            myuser.Parse(jObject );
-
-
-            
-         /*
-
-            while (JsonReader.Read()) {
-
-                if (JsonReader.Value != null) { Console.WriteLine(" token: {0} , value:  {1}", JsonReader.ValueType, JsonReader.Value); }
-                else { Console.WriteLine(" token: {0}", JsonReader.ValueType); }
-             }
-
-
-    
-            */
-
-
-            return jObject.ToString() ;
-
+            return myjObject; 
+             
             
         }
 
