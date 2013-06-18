@@ -76,19 +76,26 @@ namespace TrainerList.Models
         public Boolean UserRegister(string path)
         {
 
+            try
+            {
+                NameValueCollection reqparm = new NameValueCollection();
 
-            NameValueCollection reqparm = new NameValueCollection();
+                reqparm.Add("email", Email);
+                reqparm.Add("username", UserName);
+                reqparm.Add("password", Password);
+                reqparm.Add("firstName", firstName);
+                reqparm.Add("lastName", lastName);
+                ServerComunication Server = new ServerComunication();
+                String Response = Server.DoPost(path, reqparm);
 
-            reqparm.Add("email", Email);
-            reqparm.Add("username", UserName);
-            // reqparm.Add("password", Password);
-            reqparm.Add("firstName", firstName);
-            reqparm.Add("lastName", lastName);
-            ServerComunication Server = new ServerComunication();
-            String Response = Server.DoPost( path, reqparm);
-            
-            return true;
-
+                return true;
+            }
+            catch (Exception ex)
+            {
+                
+                string message = ex.Message;
+                return false;
+            } 
 
         }
 
@@ -187,8 +194,57 @@ namespace TrainerList.Models
     }
 
 
-    
-        
+
+    public class UserLogin {
+
+        [Required]
+        [Display(Name = "Username")]
+        public string UserName { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
+        public string Password { get; set; }
+
+        [Display(Name = "Remember me?")]
+        public bool RememberMe { get; set; }
+
+
+        public bool isValid(string validate_username, string validate_password)
+        {
+
+            UserModel UserOnline = new UserModel();
+
+            FakeUser accessfakeuser = new FakeUser();
+
+            JObject user;
+
+            user = accessfakeuser.my_fake_login(validate_username, validate_password);
+            try
+            {
+
+                if (user == null)
+                {
+
+                    return false;
+
+                }
+                else
+                {
+                    UserModel loggedUser = new UserModel();
+                    loggedUser.Parse(user);
+                    HttpContext.Current.Session.Add("loggedUser", user);
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
+           
+        }
+    } 
 
 
   

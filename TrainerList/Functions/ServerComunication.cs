@@ -28,6 +28,8 @@ namespace TrainerList.Functions
 
             return responsebody.ToString();
 
+            
+
             /*TO DO
            * Create some execption for errors
            * Create some message to show*/

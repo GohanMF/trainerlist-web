@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using TrainerList.Models;
 
 namespace TrainerList.Controllers
@@ -27,7 +28,7 @@ namespace TrainerList.Controllers
         {
 
             UserModel user = new UserModel();
-            user.GetUser("/trainer/" ,  id);
+            user.GetUser("/trainer/", id);
 
             return View(user);
         }
@@ -55,10 +56,10 @@ namespace TrainerList.Controllers
                 }
                 else
                 {
-                    return View("/user/Create" , User);
+                    return View(User);
                 }
-                 
-                
+
+
             }
             catch
             {
@@ -66,9 +67,9 @@ namespace TrainerList.Controllers
             }
         }
 
-        
-        
-        
+
+
+
         //
         // GET: /User/Edit/5
 
@@ -76,22 +77,22 @@ namespace TrainerList.Controllers
         {
 
             UserModel user = new UserModel();
-            user.GetUser("/trainer/" , id);
+            user.GetUser("/trainer/", id);
 
             return View(user);
-            
+
         }
 
         //
         // POST: /User/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(string id, UserModel  user)
+        public ActionResult Edit(string id, UserModel user)
         {
             try
             {
                 // TODO: Add update logic here
-                if (user.UserSave("/trainer/" , id))
+                if (user.UserSave("/trainer/", id))
                 {
                     return RedirectToAction("/Home/index");
                 }
@@ -99,8 +100,8 @@ namespace TrainerList.Controllers
                 {
                     return View("/user/Create", User);
                 }
-                 
-                
+
+
             }
             catch
             {
@@ -108,6 +109,49 @@ namespace TrainerList.Controllers
             }
         }
 
-    
+        // POST: /User/Login
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(UserLogin user)
+        {
+            if (ModelState.IsValid)
+            {
+
+                if (user.isValid(user.UserName, user.Password))
+                {
+
+                    FormsAuthentication.SetAuthCookie(user.UserName, user.RememberMe);
+
+                    return Redirect("/Home/index");
+                }
+              
+                
+            }
+          
+
+                ModelState.AddModelError("Erro", "Something wrog in the bus its ..... Dead");
+                return View(user);
+            
+
+        }
+
+        // POST LOGOFF
+        
+        
+        public ActionResult LogOff()
+        {
+
+            FormsAuthentication.SignOut();
+            
+
+            return Redirect("/Home/index");
+        }
+
+
+          
+
+
     }
 }
