@@ -18,13 +18,12 @@ namespace TrainerList.Functions
     public class ServerComunication
     {
         string url = "http://localhost:8080" ;
-        public String DoPost(string path, NameValueCollection reqparm)
+        public String DoPost(string path, NameValueCollection reqparm  )
         {
 
             WebClient client = new WebClient();
-            byte[] responsebytes = client.UploadValues(url + path, "POST", reqparm);
-            UTF8Encoding responsebody = new UTF8Encoding();
-            responsebody.GetString(responsebytes);
+            byte[] responsebytes = client.UploadValues(url + path, "POST" , reqparm );
+            string responsebody = client.Encoding.GetString(responsebytes);
 
             return responsebody.ToString();
 

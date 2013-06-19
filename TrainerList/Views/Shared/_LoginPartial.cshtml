@@ -8,7 +8,7 @@
 } else {
         <li class="float-right dropdown" >
             <a class="dropdown-toggle " data-toggle="dropdown" href="#">Login</a>
-                <form class="dropdown-menu row" role="menu" aria-labelledby="dLabel"  method="post" action="User/Login" > 
+                <form class="dropdown-menu row" role="menu" aria-labelledby="dLabel"  method="post" action="/User/Login" > 
                     <div class="span3 dropdown-login">
                         @Html.AntiForgeryToken()
                         @Html.ValidationSummary(true) 
@@ -36,7 +36,7 @@
                         <div style=" clear : both ;">
                             <div class="dropdown-signin " style =" display : block ">
                                 <input type="submit" style="height : 30px" class=" btn float-left btn-primary " value="Login"  />
-                                @Html.ActionLink("Register", "create", "User", routeValues: null, htmlAttributes: new { id = "registerLink" , @class="float-right btn" })
+                                @Html.ActionLink("Register", "New", "User", routeValues: null, htmlAttributes: new { id = "registerLink" , @class="float-right btn" })
                             </div>
                         </div>
                            

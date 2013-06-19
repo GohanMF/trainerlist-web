@@ -20,7 +20,6 @@ namespace TrainerList.Controllers
 
             return View(user);
         }
-
         //
         // GET: /User/Details/5
 
@@ -36,7 +35,7 @@ namespace TrainerList.Controllers
         //
         // GET: /User/Create2
 
-        public ActionResult Create()
+        public ActionResult New()
         {
             return View();
         }
@@ -45,9 +44,8 @@ namespace TrainerList.Controllers
         // POST: /User/Create
 
         [HttpPost]
-
         [AllowAnonymous]
-        public ActionResult Create(UserModel User)
+        public ActionResult New(UserModel User)
         {
             try
             {
@@ -166,7 +164,17 @@ namespace TrainerList.Controllers
         }
 
 
-          
+
+        [HttpGet]
+        public ActionResult Delete()
+        {
+            UserModel User = new UserModel(); 
+            User = (UserModel)Session["loggedUser"];
+            FormsAuthentication.SignOut();
+            User.UserDelete("/trainer/" + User._id + "/delete");
+            return Redirect("Home/index");
+        }
+           
 
 
     }

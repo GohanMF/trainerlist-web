@@ -68,7 +68,7 @@ namespace TrainerList.Models
             reqparm.Add("lastName", lastName);
             ServerComunication Server = new ServerComunication();
             String Response = Server.DoPost(path + _id , reqparm);
-            Console.WriteLine(Response);
+            
 
 
             return true;
@@ -91,8 +91,9 @@ namespace TrainerList.Models
                 reqparm.Add("lastName", lastName);
                 ServerComunication Server = new ServerComunication();
                 String Response = Server.DoPost(path, reqparm);
+                JObject myjObject = JObject.Parse(Response);
 
-                return true;
+                return Parse(myjObject);
             }
             catch (Exception ex)
             {
@@ -115,7 +116,7 @@ namespace TrainerList.Models
             reqparm.Add("lastName", lastName);
             ServerComunication Server = new ServerComunication();
             String Response = Server.DoPost(path, reqparm);
-            Console.WriteLine(Response);
+
 
 
             return true;
@@ -143,7 +144,16 @@ namespace TrainerList.Models
 
         }
 
+        public bool UserDelete(string path)
+        {
 
+            ServerComunication server = new ServerComunication();
+            NameValueCollection reqparm = new NameValueCollection();
+
+            server.DoPost(path, reqparm);
+            return true;
+
+        }
   
 
 
@@ -234,13 +244,13 @@ namespace TrainerList.Models
                 {
 
                     return false;
-
+                     
                 }
                 else
                 {
                     UserModel loggedUser = new UserModel();
                     loggedUser.Parse(user);
-                    HttpContext.Current.Session.Add("loggedUser", user);
+                    HttpContext.Current.Session.Add("loggedUser", loggedUser);
                     return true;
                 }
             }
