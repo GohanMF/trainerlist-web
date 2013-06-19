@@ -20,51 +20,33 @@ namespace TrainerList.Tests.Controllers
 
             Assert.AreEqual(true, user.UserRegister("/trainer"));
 
-        }
+     
+            bool Recived = user.GetUser("/trainer/", user._id);
 
-
-        [TestMethod]
-        public void test_getUser()
-        {
-            UserModel user = new UserModel();
-
-           bool resposta = user.GetUser("/trainer/", "0ddc29d0d97dac7f5c5a8097f4000f58");
-
-           Assert.AreEqual(true, resposta);
-
-        
-        }
-
-
-        [TestMethod]
-        public void test_EditUser()
-        {
-            UserModel user = new UserModel();
-
-            bool resposta = user.GetUser("/trainer/", "0ddc29d0d97dac7f5c5a8097f4000f58");
+            Assert.AreEqual(true, Recived);
 
             string nameTempUser = string.Empty;
-
 
             Random my_random = new Random(DateTime.Now.Millisecond);
             int num_random = my_random.Next(0, 99);
 
             nameTempUser = "tempuser" + num_random;
 
-
             user.firstName = nameTempUser;
 
             if (user.UserSave("/trainer/")) {
             
             
-             user.GetUser("/trainer/", "0ddc29d0d97dac7f5c5a8097f4000f58");
+                user.GetUser("/trainer/", user._id);
 
 
-             Assert.AreEqual(nameTempUser, user.firstName);
+                Assert.AreEqual(nameTempUser, user.firstName);
             }
 
+
+            Assert.IsTrue(user.UserDelete("/trainer/"+user._id+"/delete"));
            
-            Assert.AreEqual(true, resposta);
+            //Falta o delete Perfil
 
         }
 
