@@ -50,8 +50,12 @@ namespace TrainerList.Models
         [Display(Name = "First Name")]
         public string firstName { get; set; }
 
-  
-        public Boolean UserSave( string path , string id )
+
+        [Display(Name = "Remember me?")]
+        public bool RememberMe { get; set; }
+
+
+        public Boolean UserSave( string path  )
         {
 
 
@@ -63,7 +67,7 @@ namespace TrainerList.Models
             reqparm.Add("firstName", firstName);
             reqparm.Add("lastName", lastName);
             ServerComunication Server = new ServerComunication();
-            String Response = Server.DoPost(path +id , reqparm);
+            String Response = Server.DoPost(path + _id , reqparm);
             Console.WriteLine(Response);
 
 
@@ -120,11 +124,14 @@ namespace TrainerList.Models
         }
 
 
-        public void GetUser(string path , string id) {
+        public bool GetUser(string path , string id) {
+            try {
+                ServerComunication server = new ServerComunication();
+              return  Parse(server.DoGet(path + id));
 
-            ServerComunication server = new ServerComunication();
-            Parse(server.DoGet(path + id));
-        
+            }catch(Exception ex){
+                return false;
+            }
         }
 
 

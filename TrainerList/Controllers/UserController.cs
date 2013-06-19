@@ -45,6 +45,8 @@ namespace TrainerList.Controllers
         // POST: /User/Create
 
         [HttpPost]
+
+        [AllowAnonymous]
         public ActionResult Create(UserModel User)
         {
             try
@@ -73,6 +75,7 @@ namespace TrainerList.Controllers
         //
         // GET: /User/Edit/5
 
+        [AllowAnonymous]
         public ActionResult Edit(string id)
         {
 
@@ -87,12 +90,13 @@ namespace TrainerList.Controllers
         // POST: /User/Edit/5
 
         [HttpPost]
+        [AllowAnonymous]
         public ActionResult Edit(string id, UserModel user)
         {
             try
             {
                 // TODO: Add update logic here
-                if (user.UserSave("/trainer/", id))
+                if (user.UserSave("/trainer/"))
                 {
                     return RedirectToAction("/Home/index");
                 }
@@ -109,6 +113,19 @@ namespace TrainerList.Controllers
             }
         }
 
+
+        // GET: /user/Login
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult Login()
+        {
+            return View();    
+                
+         }
+        
+
+
         // POST: /User/Login
 
         [HttpPost]
@@ -123,7 +140,6 @@ namespace TrainerList.Controllers
                 {
 
                     FormsAuthentication.SetAuthCookie(user.UserName, user.RememberMe);
-
                     return Redirect("/Home/index");
                 }
               
@@ -131,7 +147,7 @@ namespace TrainerList.Controllers
             }
           
 
-                ModelState.AddModelError("Erro", "Something wrog in the bus its ..... Dead");
+                ModelState.AddModelError("Erro", "Forget the password ? want to recover it ? no cant do ... do a new regiter we need items");
                 return View(user);
             
 

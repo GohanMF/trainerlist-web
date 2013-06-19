@@ -1,7 +1,8 @@
-﻿@model TrainerList.Models.UserLogin
+﻿@model TrainerList.Models.UserModel
+
 @if (Request.IsAuthenticated) {
     <text>
-        Hello, @Html.ActionLink(User.Identity.Name, "Manage", "Account", routeValues: null, htmlAttributes: new { @class = "username", title = "Manage" })!
+        Hello, @Html.ActionLink(User.Identity.Name, "Details", "User", routeValues: new {id = "0ddc29d0d97dac7f5c5a8097f4000f58"} , htmlAttributes: new { @class = "username", title = "Manage" })!
         @Html.ActionLink("LogOff", "LogOff" , "User")
     </text>
 } else {
@@ -12,28 +13,33 @@
                         @Html.AntiForgeryToken()
                         @Html.ValidationSummary(true) 
                         
+                        @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "TextAlign-Left" })
+                        <div class="editor-field">
+                        @Html.EditorFor(model => model.UserName)
+                        </div>
                         
+                        @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "TextAlign-Left" })
                         <div class="editor-field">
-                            @Html.EditorFor(model => model.UserName)
-                        </div>
-                        <div class="editor-field">
-                            @Html.EditorFor(model => model.Password)
-                        </div>
-                        <div class="editor-field">
-                            @Html.EditorFor(model => model.RememberMe)
-                        </div>
-                       <!-- 
-                            <input class="dropdown-username" type="text" placeholder="username"  > 
-                            <input class="dropdown-password" type="password" placeholder="password">
-                            <input class="dropdown-rememberme" type="checkbox"   />
-                        -->
-                        <div class="dropdown-signin ">
-                               <input type="submit" style="height : 30px" class=" btn float-left btn-primary " value="Login"  />
-                        </div> 
-                        <div "block" class=" dropdown-register" >
-                             @Html.ActionLink("Register", "create", "User", routeValues: null, htmlAttributes: new { id = "registerLink" , @class="float-right btn" })
-                        </div>
+                        @Html.EditorFor(model => model.Password)
+                        </div >
+                        
+                        <div class="editor-field" >
+                            <div style="float : left ">
+                                @Html.LabelFor(model => model.RememberMe)
+                            </div>
                             
+                            <div style="float : left  ; margin-left : 5px  " >
+                                @Html.EditorFor(model => model.RememberMe)
+                            </div>
+                        </div>
+                        
+                        <div style=" clear : both ;">
+                            <div class="dropdown-signin " style =" display : block ">
+                                <input type="submit" style="height : 30px" class=" btn float-left btn-primary " value="Login"  />
+                                @Html.ActionLink("Register", "create", "User", routeValues: null, htmlAttributes: new { id = "registerLink" , @class="float-right btn" })
+                            </div>
+                        </div>
+                           
                     </div>
                 </form>
         </li>

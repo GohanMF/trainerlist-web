@@ -20,8 +20,12 @@
     .dropdown-signin {
          margin-left     : 0px !important ;
     }
-   
-    
+
+.TextAlign-Left {
+
+text-align: left; 
+margin-left: 5px;
+}
      /* Menu */
 
     .main-menu {
