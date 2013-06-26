@@ -18,10 +18,10 @@ namespace TrainerList.Tests.Controllers
             user.Password="1234567890";
             user.Email = "emailbla@fn.ln";
 
-            Assert.AreEqual(true, user.UserRegister("/trainer"));
+            Assert.AreEqual(true, user.UserRegister());
 
      
-            bool Recived = user.GetUser("/trainer/", user._id);
+            bool Recived = user.GetUser(user._id);
 
             Assert.AreEqual(true, Recived);
 
@@ -34,19 +34,19 @@ namespace TrainerList.Tests.Controllers
 
             user.firstName = nameTempUser;
 
-            if (user.UserSave("/trainer/")) {
+            if (user.UserSave()) {
             
             
-                user.GetUser("/trainer/", user._id);
+                user.GetUser( user._id);
 
 
                 Assert.AreEqual(nameTempUser, user.firstName);
             }
 
 
-            Assert.IsTrue(user.UserDelete("/trainer/"+user._id+"/delete"));
+            Assert.IsTrue(user.UserDelete("/trainer/" + user._id + "/delete"));
            
-            //Falta o delete Perfil
+            
 
         }
 
