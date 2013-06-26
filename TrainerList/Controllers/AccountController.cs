@@ -18,8 +18,7 @@ using TrainerList.Functions;
 
 namespace TrainerList.Controllers
 {
-    [Authorize]
-    [InitializeSimpleMembership]
+    
     public class AccountController : Controller
     {
         //

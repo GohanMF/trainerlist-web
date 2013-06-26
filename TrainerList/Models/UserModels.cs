@@ -7,6 +7,8 @@ using TrainerList.Functions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Script.Serialization;
+using System.Web.Security;
 
 namespace TrainerList.Models
 {
@@ -55,9 +57,9 @@ namespace TrainerList.Models
         public bool RememberMe { get; set; }
 
 
-        public Boolean UserSave( string path  )
+        public Boolean UserSave()
         {
-
+            string path = "/trainer/";
 
             NameValueCollection reqparm = new NameValueCollection();
             reqparm.Add("_id", _id);
@@ -77,9 +79,9 @@ namespace TrainerList.Models
         }
 
 
-        public Boolean UserRegister(string path)
+        public Boolean UserRegister()
         {
-
+            string path = "/trainer";
             try
             {
                 NameValueCollection reqparm = new NameValueCollection();
@@ -125,7 +127,8 @@ namespace TrainerList.Models
         }
 
 
-        public bool GetUser(string path , string id) {
+        public bool GetUser(string id) {
+            string path = "/trainer/";
             try {
                 ServerComunication server = new ServerComunication();
               return  Parse(server.DoGet(path + id));
@@ -144,9 +147,9 @@ namespace TrainerList.Models
 
         }
 
-        public bool UserDelete(string path)
+        public bool UserDelete(string id)
         {
-
+            string path = "/trainer/" + id + "/delete";
             ServerComunication server = new ServerComunication();
             NameValueCollection reqparm = new NameValueCollection();
 
@@ -206,6 +209,7 @@ namespace TrainerList.Models
         
         }
 
+        
               
 
     }
@@ -213,6 +217,8 @@ namespace TrainerList.Models
 
 
     public class UserLogin {
+
+        public  string _id { get; private set; }
 
         [Required]
         [Display(Name = "Username")]
@@ -227,7 +233,7 @@ namespace TrainerList.Models
         public bool RememberMe { get; set; }
 
 
-        public bool isValid(string validate_username, string validate_password)
+        public bool isValid(string validate_username, string validate_password, bool rememberMe)
         {
 
             UserModel UserOnline = new UserModel();
@@ -244,14 +250,18 @@ namespace TrainerList.Models
                 {
 
                     return false;
-                     
+
                 }
                 else
                 {
                     UserModel loggedUser = new UserModel();
                     loggedUser.Parse(user);
+                    _id = loggedUser._id;
+                    CreateCookie(loggedUser , rememberMe);
                     HttpContext.Current.Session.Add("loggedUser", loggedUser);
                     return true;
+
+                  
                 }
             }
             catch (Exception ex)
@@ -259,8 +269,27 @@ namespace TrainerList.Models
                 return false;
             }
 
-           
+
         }
+
+        public void CreateCookie(UserModel user , bool rememberMe ) {
+
+            var serializer = new JavaScriptSerializer();
+            string userData = serializer.Serialize(user);
+
+            FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1, user.UserName, DateTime.Now, DateTime.Now.AddYears(1), rememberMe, userData);
+            string encryptedTicket = FormsAuthentication.Encrypt(ticket);
+
+            HttpCookie mycookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
+            if (ticket.IsPersistent)
+            {
+                mycookie.Expires = ticket.Expiration;
+                mycookie.HttpOnly = true;
+            }
+            HttpContext.Current.Response.Cookies.Add(mycookie);
+        
+        }
+       
     } 
 
 

@@ -17,7 +17,7 @@ namespace TrainerList.Functions
             JObject jUserFake;
             if (username == "GohanMF" && password == "123456")
             {
-                string userFake = "{'username' : 'GohanMF', 'fistName' : 'Gohan' , 'lastName' : 'MF' , 'email' : 'Gohanmf@gmail.com' , '_id' : '5f17834f62bd7a316748f59833001606', '_rev' : '1-b8d67b3cb328b7425020b9ad91834d1d' }";
+                string userFake = "{'username' : 'GohanMF', 'fistName' : 'Gohan' , 'lastName' : 'MF' , 'email' : 'Gohanmf@gmail.com' , '_id' : '0ddc29d0d97dac7f5c5a8097f4000f58', '_rev' : '1-b8d67b3cb328b7425020b9ad91834d1d' }";
                jUserFake = JObject.Parse(userFake);
             }else{ 
                jUserFake = null;

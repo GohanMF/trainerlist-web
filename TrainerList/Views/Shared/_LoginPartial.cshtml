@@ -1,14 +1,29 @@
-﻿@model TrainerList.Models.UserModel
+﻿
+@model TrainerList.Models.UserLogin
+
+@{TrainerList.authRequest.my_AuthenticateRequest();
+  }
+      @{  
+  TrainerList.Models.UserLogin loggedUser = new TrainerList.Models.UserLogin();
+  TrainerList.Models.UserModel currentUser = new TrainerList.Models.UserModel(); 
+        
+    if(Session["loggedUser"] != null && Request.IsAuthenticated){ 
+        currentUser = (TrainerList.Models.UserModel)Session["loggedUser"];       
+    }
+    
+}
 
 @if (Request.IsAuthenticated) {
     <text>
-        Hello, @Html.ActionLink(User.Identity.Name, "Details", "User", routeValues: new {id = "0ddc29d0d97dac7f5c5a8097f4000f58"} , htmlAttributes: new { @class = "username", title = "Manage" })!
+        Hello, @Html.ActionLink(currentUser.UserName, "Details", "User", routeValues: new {id = currentUser._id
+          } , htmlAttributes: new { @class = "username", title = "Manage" })!
         @Html.ActionLink("LogOff", "LogOff" , "User")
     </text>
 } else {
         <li class="float-right dropdown" >
             <a class="dropdown-toggle " data-toggle="dropdown" href="#">Login</a>
                 <form class="dropdown-menu row" role="menu" aria-labelledby="dLabel"  method="post" action="/User/Login" > 
+    
                     <div class="span3 dropdown-login">
                         @Html.AntiForgeryToken()
                         @Html.ValidationSummary(true) 
@@ -41,6 +56,7 @@
                         </div>
                            
                     </div>
+                
                 </form>
         </li>
     

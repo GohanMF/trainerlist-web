@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using System.Web.Security;
 using TrainerList.Models;
 
@@ -27,7 +28,7 @@ namespace TrainerList.Controllers
         {
 
             UserModel user = new UserModel();
-            user.GetUser("/trainer/", id);
+            user.GetUser(id);
 
             return View(user);
         }
@@ -50,7 +51,7 @@ namespace TrainerList.Controllers
             try
             {
 
-                if (User.UserRegister("/trainer"))
+                if (User.UserRegister())
                 {
                     return Redirect("Home");
                 }
@@ -78,8 +79,8 @@ namespace TrainerList.Controllers
         {
 
             UserModel user = new UserModel();
-            user.GetUser("/trainer/", id);
-
+            user.GetUser( id);
+            
             return View(user);
 
         }
@@ -94,7 +95,7 @@ namespace TrainerList.Controllers
             try
             {
                 // TODO: Add update logic here
-                if (user.UserSave("/trainer/"))
+                if (user.UserSave())
                 {
                     return RedirectToAction("/Home/index");
                 }
@@ -128,19 +129,22 @@ namespace TrainerList.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
         public ActionResult Login(UserLogin user)
         {
             if (ModelState.IsValid)
             {
 
-                if (user.isValid(user.UserName, user.Password))
+                if (user.isValid(user.UserName, user.Password, user.RememberMe))
                 {
+                       
 
-                    FormsAuthentication.SetAuthCookie(user.UserName, user.RememberMe);
-                    return Redirect("/Home/index");
-                }
-              
+
+                        //}
+                        //FormsAuthentication.
+                        // FormsAuthentication.SetAuthCookie(user.UserName , user.RememberMe);
+                        return Redirect("/Home/index");
+                   
+                }  
                 
             }
           
@@ -171,7 +175,7 @@ namespace TrainerList.Controllers
             UserModel User = new UserModel(); 
             User = (UserModel)Session["loggedUser"];
             FormsAuthentication.SignOut();
-            User.UserDelete("/trainer/" + User._id + "/delete");
+            User.UserDelete( User._id );
             return Redirect("Home/index");
         }
            
