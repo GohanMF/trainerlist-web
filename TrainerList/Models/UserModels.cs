@@ -68,8 +68,7 @@ namespace TrainerList.Models
             reqparm.Add("username", UserName);
             reqparm.Add("firstName", firstName);
             reqparm.Add("lastName", lastName);
-            ServerComunication Server = new ServerComunication();
-            String Response = Server.DoPost(path + _id , reqparm);
+            String Response = ServerComunication.DoPost(path + _id, reqparm);
             
 
 
@@ -91,8 +90,7 @@ namespace TrainerList.Models
                 reqparm.Add("password", Password);
                 reqparm.Add("firstName", firstName);
                 reqparm.Add("lastName", lastName);
-                ServerComunication Server = new ServerComunication();
-                String Response = Server.DoPost(path, reqparm);
+                String Response = ServerComunication.DoPost(path, reqparm);
                 JObject myjObject = JObject.Parse(Response);
 
                 return Parse(myjObject);
@@ -116,8 +114,7 @@ namespace TrainerList.Models
             // reqparm.Add("password", Password);
             reqparm.Add("firstName", firstName);
             reqparm.Add("lastName", lastName);
-            ServerComunication Server = new ServerComunication();
-            String Response = Server.DoPost(path, reqparm);
+            String Response = ServerComunication.DoPost(path, reqparm);
 
 
 
@@ -130,8 +127,7 @@ namespace TrainerList.Models
         public bool GetUser(string id) {
             string path = "/trainer/";
             try {
-                ServerComunication server = new ServerComunication();
-              return  Parse(server.DoGet(path + id));
+              return  Parse(ServerComunication.DoGet(path + id));
 
             }catch(Exception ex){
                 return false;
@@ -142,18 +138,15 @@ namespace TrainerList.Models
         public void GetUsers(string path)
         {
 
-            ServerComunication server = new ServerComunication();
-            Parse(server.DoGet(path));
+            Parse(ServerComunication.DoGet(path));
 
         }
 
         public bool UserDelete(string id)
         {
             string path = "/trainer/" + id + "/delete";
-            ServerComunication server = new ServerComunication();
             NameValueCollection reqparm = new NameValueCollection();
-
-            server.DoPost(path, reqparm);
+            ServerComunication.DoPost(path, reqparm);
             return true;
 
         }
@@ -257,19 +250,16 @@ namespace TrainerList.Models
                     UserModel loggedUser = new UserModel();
                     loggedUser.Parse(user);
                     _id = loggedUser._id;
-                    CreateCookie(loggedUser , rememberMe);
+                    CreateCookie(loggedUser, rememberMe);
                     HttpContext.Current.Session.Add("loggedUser", loggedUser);
                     return true;
 
-                  
                 }
             }
             catch (Exception ex)
             {
                 return false;
             }
-
-
         }
 
         public void CreateCookie(UserModel user , bool rememberMe ) {
@@ -287,13 +277,6 @@ namespace TrainerList.Models
                 mycookie.HttpOnly = true;
             }
             HttpContext.Current.Response.Cookies.Add(mycookie);
-        
-        }
-       
+        } 
     } 
-
-
-  
-
-    
 }

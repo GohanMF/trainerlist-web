@@ -14,11 +14,11 @@ using System.IO;
 
 namespace TrainerList.Functions
 {
-   
-    public class ServerComunication
+   s
+    public static class ServerComunication
     {
         string url = "http://localhost:8080" ;
-        public String DoPost(string path, NameValueCollection reqparm  )
+        public static String DoPost(string path, NameValueCollection reqparm  )
         {
 
             WebClient client = new WebClient();
@@ -35,7 +35,7 @@ namespace TrainerList.Functions
 
         }
 
-        public JObject DoGet(string path)
+        public static JObject DoGet(string path)
         {             
 
 

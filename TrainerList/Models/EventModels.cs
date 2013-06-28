@@ -26,18 +26,18 @@ namespace TrainerList.Models
         public string description { get; set; }
 
 
-        public Boolean eventNew() { 
-        
- 
+        public Boolean eventNew(string userId) {
+            string = "/events/" +userId+ "/create";
+            NameValueCollection reqparm = new NameValueCollection();
             reqparm.Add("timestamp", Timestamp.Ticks.ToString());
             reqparm.Add("descriptio", description);
-
 
 
 
             return true; 
         }
 
+      
 
 
         public Boolean Parse(JObject jObject)
@@ -55,8 +55,6 @@ namespace TrainerList.Models
             {
                 return false;
             }
-
-
         }
     }
 }
