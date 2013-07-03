@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Collections.Specialized;
-using TrainerList.Functions;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System;
+using System.Collections.Specialized;
 using System.ComponentModel.DataAnnotations;
+using System.Web;
 using System.Web.Script.Serialization;
 using System.Web.Security;
+using TrainerList.Functions;
 
 namespace TrainerList.Models
 {
 
-     
 
     public class UserModel
     {

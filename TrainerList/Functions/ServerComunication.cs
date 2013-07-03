@@ -14,10 +14,10 @@ using System.IO;
 
 namespace TrainerList.Functions
 {
-   s
+   
     public static class ServerComunication
     {
-        string url = "http://localhost:8080" ;
+        static string url = "http://localhost:8080" ;
         public static String DoPost(string path, NameValueCollection reqparm  )
         {
 

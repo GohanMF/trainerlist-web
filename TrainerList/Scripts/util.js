@@ -5,4 +5,10 @@
     $('.dropdown input, .dropdown label').click(function (e) {
         e.stopPropagation();
     });
+
+//transform something in a datepicker
+
+    $('.datepicker').datepicker();
+
 }
+

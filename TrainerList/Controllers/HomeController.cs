@@ -26,7 +26,7 @@ namespace TrainerList.Controllers
             try
             {
                  
-                ServerComunication Server = new ServerComunication();
+              //  ServerComunication Server = new ServerComunication();
               //  String Response = Server.DoGet("/trainer/a36dfec1f123670e36885e88eb0009e8");
                 Console.WriteLine(Response);
             }

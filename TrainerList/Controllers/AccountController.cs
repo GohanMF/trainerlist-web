@@ -100,10 +100,10 @@ namespace TrainerList.Controllers
                         reqparm.Add("lastName",model.lastName);
                       
                         
-                       ServerComunication Server = new ServerComunication();
-                       String Response = Server.DoPost( "/trainer" ,   reqparm  );
+                      // ServerComunication Server = new ServerComunication();
+                      // String Response = Server.DoPost( "/trainer" ,   reqparm  );
                         
-                       Console.WriteLine(Response);
+                      // Console.WriteLine(Response);
                             
                     
                      
