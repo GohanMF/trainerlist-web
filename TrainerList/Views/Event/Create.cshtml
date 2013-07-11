@@ -13,15 +13,19 @@
         <legend>EventModel</legend>
 
 
-        <input type="text" class="datepicker" placeholder="some datetime" />
        
         <div class="editor-label">
             @Html.LabelFor(model => model.Timestamp)
         </div>
-        <div class="editor-field datepicker">
-            
-            @Html.EditorFor(model => model.Timestamp) 
-            @Html.ValidationMessageFor(model => model.Timestamp)
+        <div class="editor-field ">
+            <div id="datetimepicker1" class="input-append date">
+                @Html.TextBoxFor(model => model.Timestamp, new Dictionary<string , object>{ {"class","datepicker text-box singl-line"},{"data-format","yyyy-MM-dd T hh:mm:ss T Z D"}}) 
+           
+                @Html.ValidationMessageFor(model => model.Timestamp)
+                <span class="add-on">
+                   <i data-time-icon="icon-time" data-date-icon="icon-calendar" class="icon-calendar"></i>
+                </span>
+            </div>
         </div>
 
         <div class="editor-label">

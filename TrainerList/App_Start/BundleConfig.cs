@@ -12,7 +12,7 @@ namespace TrainerList
                 "~/Scripts/util.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/jquery-1.9.1.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
                         "~/Scripts/jquery-ui-{version}.js"));
@@ -22,13 +22,14 @@ namespace TrainerList
                         "~/Scripts/jquery.validate*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js"));
-            
+                      "~/Scripts/bootstrap.js",
+                      "~/Scripts/bootstrap-datetimepicker.js"));
+
+           
+
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
-            bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
-                        "~/Scripts/modernizr-*"));
-
+          
             bundles.Add(new StyleBundle("~/Content/css").Include(
                         "~/Content/site.css"));
  
@@ -49,10 +50,12 @@ namespace TrainerList
 
             bundles.Add(new StyleBundle("~/Content/css/bootstrap").Include(
                         "~/Content/bootstrap.css",
-                        "~/Content/bootstrap-responsive.css"));
+                        "~/Content/bootstrap-responsive.css",
+                        "~/content/bootstrap-datetimepicker.css"));
 
             bundles.Add(new StyleBundle("~/Content/css/mycss").Include(
-                         "~/content/login.css"));
+                         "~/content/login.css"
+                         ));
 
            
 

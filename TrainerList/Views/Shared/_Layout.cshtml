@@ -5,16 +5,13 @@
         <title>@ViewBag.Title - My ASP.NET MVC Application</title>
         <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" runat="server" media="screen" href="~/content/bootstrap.css" />
-        @Styles.Render("~/Content/css")
-        @Styles.Render("~/Content/css/bootstrap")
-        @Styles.Render("~/Content/css/mycss")
+       
         
         @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/jqueryui")
-        @Scripts.Render("~/bundles/modernizr")
-        @Scripts.Render("~/bundles/bootstrap")
-        @Scripts.Render("~/bundles/utils")
+        
+
+
+        
     </head>
     <body >
         <div class="container" >
@@ -50,5 +47,15 @@
             </footer>
             @RenderSection("scripts", required: false)
         </div> 
+        
+      
+        
+        @Styles.Render("~/Content/css")
+        @Styles.Render("~/Content/css/bootstrap")
+        @Styles.Render("~/Content/css/mycss")
+
+        @Scripts.Render("~/bundles/utils")   
+        @Scripts.Render("~/bundles/bootstrap")
     </body>
+
 </html>
