@@ -19,12 +19,13 @@
         </div>
         <div class="editor-field ">
             <div id="datetimepicker1" class="input-append date">
-                @Html.TextBoxFor(model => model.Timestamp, new Dictionary<string , object>{ {"class","datepicker text-box singl-line"},{"data-format","yyyy-MM-dd T hh:mm:ss T Z D"}}) 
-           
-                @Html.ValidationMessageFor(model => model.Timestamp)
-                <span class="add-on">
+                 @Html.TextBoxFor(model => model.Timestamp, new Dictionary<string , object>{ {"class","datepicker hide"},{"data-format","yyyy-MM-dd hh:mm:ss "}}) 
+                 @Html.ValidationMessageFor(model => model.Timestamp)
+                   <span class="add-on">
                    <i data-time-icon="icon-time" data-date-icon="icon-calendar" class="icon-calendar"></i>
                 </span>
+                
+              
             </div>
         </div>
 

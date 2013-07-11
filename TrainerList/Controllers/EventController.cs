@@ -14,7 +14,10 @@ namespace TrainerList.Controllers
 
         public ActionResult Index()
         {
-            return View();
+
+            EventModel events = new EventModel();
+
+            return View(events.upcoming(Functions.loggedUser.get_id()));
         }
 
         //

@@ -35,14 +35,14 @@ namespace TrainerList.Functions
 
         }
 
-        public static JObject DoGet(string path)
+        public static dynamic DoGet(string path)
         {             
 
 
             WebClient client = new WebClient();
             Stream stream =  client.OpenRead(url + path);
             StreamReader streamReader = new StreamReader (stream);
-            JObject myjObject = JObject.Parse(streamReader.ReadLine());
+            dynamic myjObject = JValue.Parse( streamReader.ReadToEnd());
             client.Dispose();
 
             /*TO DO

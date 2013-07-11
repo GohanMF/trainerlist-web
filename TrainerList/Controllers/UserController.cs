@@ -53,7 +53,7 @@ namespace TrainerList.Controllers
 
                 if (User.UserRegister())
                 {
-                    return Redirect("Home");
+                    return Redirect("/Home/Index");
                 }
                 else
                 {

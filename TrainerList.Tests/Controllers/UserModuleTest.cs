@@ -44,7 +44,7 @@ namespace TrainerList.Tests.Controllers
             }
 
 
-            Assert.IsTrue(user.UserDelete("/trainer/" + user._id + "/delete"));
+            Assert.IsTrue(user.UserDelete( user._id ));
            
             
 

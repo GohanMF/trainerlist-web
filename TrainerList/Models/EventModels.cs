@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using TrainerList.Functions;
+using System.Collections.Generic;
 
 namespace TrainerList.Models
 {
@@ -28,12 +29,27 @@ namespace TrainerList.Models
         public Boolean eventNew(string userId) {
             string path = "/events/" +userId+ "/create";
             NameValueCollection reqparm = new NameValueCollection();
-            reqparm.Add("timestamp", Timestamp.Ticks.ToString());
-            reqparm.Add("descriptio", description);
+            reqparm.Add("timestamp", Timestamp.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ"));
+            reqparm.Add("description", description);
 
             ServerComunication.DoPost(path,reqparm);
 
             return true; 
+        }
+
+        public List<EventModel> upcoming(string userId) {
+
+            string path = "/events/upcoming/";
+            try
+            {
+                return ParseMulti(ServerComunication.DoGet(path + userId));
+
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        
         }
 
       
@@ -43,10 +59,9 @@ namespace TrainerList.Models
         {
             try
             {
-              TimestampAttribute my_timestamp = new TimestampAttribute();
                 _id = (String)jObject["_id"];
                 _rev =   (String)jObject["_rev"];
-                //Timestamp.AddTicks( (long)jObject["timestamp"]); 'i have to convert string o time (yyyy-mm-ddThh:MM:mmmmZ)
+                Timestamp = (DateTime)jObject["timestamp"];
                 description = (String)jObject["description"];
                 return true;
             }
@@ -55,5 +70,31 @@ namespace TrainerList.Models
                 return false;
             }
         }
+
+
+        public List<EventModel> ParseMulti(JArray jObject)
+        {
+            try
+            {
+                List<EventModel> Events = new List<EventModel>();
+
+                foreach (JObject item in jObject)
+                {
+                    EventModel newEvent = new EventModel();
+
+                    newEvent._id = (String)item["_id"];
+                    newEvent._rev = (String)item["_rev"];
+                    newEvent.Timestamp = (DateTime)item["timestamp"];
+                    newEvent.description = (String)item["description"];
+                    Events.Add(newEvent);
+                }
+                return Events;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
     }
 }
