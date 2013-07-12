@@ -196,8 +196,6 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\EventModels.cs" />
-    <Compile Include="Models\TrainerListContextMine.cs" />
-    <Compile Include="Models\TrainerListContextMne.cs" />
     <Compile Include="Models\UserModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

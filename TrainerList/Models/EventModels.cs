@@ -37,12 +37,12 @@ namespace TrainerList.Models
             return true; 
         }
 
-        public List<EventModel> upcoming(string userId) {
+        public List<EventModel> upcoming(string userId, int limit = 30) {
 
             string path = "/events/upcoming/";
             try
             {
-                return ParseMulti(ServerComunication.DoGet(path + userId));
+                return ParseMulti(ServerComunication.DoGet(path + userId + "? limit=" + limit.ToString()));
 
             }
             catch (Exception ex)
@@ -52,7 +52,22 @@ namespace TrainerList.Models
         
         }
 
-      
+        public List<EventModel> Old(string userId, int limit = 30)
+        {
+
+            string path = "/events/upcoming/";
+            try
+            {
+                return ParseMulti(ServerComunication.DoGet(path + userId + "?limit=" + limit.ToString()));
+
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+        }
+
 
         
         public Boolean Parse(JObject jObject)
